@@ -40,51 +40,32 @@ Both Vijay and Praneetha work on ALL topics. Tasks within each topic are split b
 
 ---
 
-## Docker
+## Data Engineering
 
-- [ ] Write `docker-compose.yml` — FastAPI + Firestore emulator + Pub/Sub emulator
-- [ ] Write `.env.example` with all required environment variables
-- [ ] Verify full local dev environment runs with `docker-compose up`
+### BigQuery Analytics
+- [ ] Set up BigQuery dataset and tables for job analytics
+- [ ] Stream match scores, skill gaps, and job trends into BigQuery after every analysis
+- [ ] Build `bigquery_client.py` — insert and query BigQuery from Python
+- [ ] Create views for: top missing skills, average match scores by job title, application trends over time
 
----
+### Data Pipeline
+- [ ] Build a data transformation pipeline to clean and normalize resume and job description data before AI analysis
+- [ ] Standardize skill names (e.g. `k8s` → `Kubernetes`, `GCP` → `Google Cloud Platform`)
+- [ ] Build `pipeline_service.py` — pre-processing layer between input and AI service
 
-## Terraform (Infrastructure as Code)
+### Embeddings & Vector Search
+- [ ] Generate embeddings for resume profiles and job descriptions using Vertex AI Embeddings API
+- [ ] Store embeddings in Firestore or a vector store
+- [ ] Build similarity search — find the most relevant past jobs for a given resume
+- [ ] Use embeddings to improve match scoring accuracy
 
-- [ ] Write `main.tf` — GCP project, APIs, services
-- [ ] Write `cloud_run.tf` — Cloud Run service definition
-- [ ] Write `gke.tf` — GKE cluster
-- [ ] Write `secret_manager.tf` — secrets
-- [ ] Write `iam.tf` — service accounts and roles
-- [ ] Create `dev` and `prod` environments
+### Data Export
+- [ ] Build `GET /export/jobs` endpoint — export full job history as CSV or JSON
+- [ ] Schedule daily export of analytics data from Firestore to BigQuery using Cloud Scheduler
+- [ ] Store exported files in Cloud Storage with date-partitioned folder structure
 
----
-
-## Kubernetes
-
-- [ ] Write `service.yaml` — Kubernetes service
-- [ ] Write `ingress.yaml` — ingress for external access
-- [ ] Write `configmap.yaml` — non-secret config
-- [ ] Set up GKE cluster via Terraform
-
----
-
-## CI/CD (Cloud Build)
-
-- [ ] Write Cloud Build steps for: build and push Docker image to Artifact Registry
-- [ ] Write Cloud Build steps for: deploy to Cloud Run or GKE on merge to main
-
----
-
-## Web UI
-
-- [ ] Build PDF upload tab in the resume input form
-- [ ] Display interview questions with category and difficulty filters
-- [ ] Display model answers section
-- [ ] Build job history dashboard with status tracking
-
----
-
-## Observability & Security
-
-- [ ] Add structured logging with request IDs for all API requests
-- [ ] Add rate limiting on AI endpoints
+### Batch Processing
+- [ ] Build `POST /analyze/batch` endpoint — accept multiple job descriptions at once
+- [ ] Publish each job as a separate Pub/Sub message for parallel async processing
+- [ ] Track batch status — return overall progress and per-job results
+- [ ] Use Dataflow or Cloud Run Jobs for large-scale batch analysis
